@@ -1,2 +1,2 @@
-# sosi_database_manager
-SoSI's data base abstraction for data repositories providers
+# sosi_components_database_interface
+SoSI's interface set for database management
