@@ -1,5 +1,5 @@
 {
-  "name": "soci_components_database_interfaces",
+  "name": "sosi_components_database_interfaces",
   "version": "1.0.0",
   "description": "SoSI's data base abstraction for data repositories providers",
   "main": "index.js",
@@ -25,5 +25,8 @@
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.2"
+  },
+  "dependencies": {
+    "vsts-npm-auth": "^0.37.0"
   }
 }
