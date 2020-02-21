@@ -1,0 +1,29 @@
+{
+  "name": "soci_components_database_interfaces",
+  "version": "1.0.0",
+  "description": "SoSI's data base abstraction for data repositories providers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonidasnascimento/sosi_database_manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonidasnascimento/sosi_database_manager/issues"
+  },
+  "homepage": "https://github.com/leonidasnascimento/sosi_database_manager#readme",
+  "devDependencies": {
+    "prettier": "^1.19.1",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.2"
+  }
+}
