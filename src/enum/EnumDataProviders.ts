@@ -1,4 +1,4 @@
-export enum DataProvidersEnum{
+export enum EnumDataProviders {
     MSSQL = 0,
     MySQL,
     Oracle,
