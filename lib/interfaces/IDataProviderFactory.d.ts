@@ -1,5 +1,5 @@
-import { IDataProvider } from "./IDataProvider";
+import { DataProvider } from "../base/DataProvider";
 import { EnumDataProviders } from "../enum/EnumDataProviders";
 export interface IDataProviderFactory {
-    GetDataProvider(provider: EnumDataProviders): IDataProvider;
+    GetDataProvider(provider: EnumDataProviders): DataProvider;
 }
