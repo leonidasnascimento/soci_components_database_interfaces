@@ -5,11 +5,11 @@ export class Output<TExecutionResult> {
   ExecutionMessage: string;
   ExecutionResult?: TExecutionResult;
 
-  constructor(private _execResult: new () => TExecutionResult | undefined) {
+  constructor() {
     this.KeyFound = false;
     this.RepositoryFound = false;
     this.WasQuerySuccessfullyExecuted = false;
     this.ExecutionMessage = "";
-    this.ExecutionResult = new _execResult();
+    this.ExecutionResult = undefined;
   }
 }
