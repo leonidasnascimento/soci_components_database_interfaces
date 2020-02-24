@@ -4,81 +4,92 @@ import { Output } from "../classes/Output";
 import { EnumConnectionState } from "../enum/EnumConnectionState";
 
 export abstract class DataProvider<TClient> implements IDataProvider {
-    // Properties
-    ConnectionSettings: JSON;
-    Client?: TClient;
+  // Properties
+  ConnectionSettings: JSON;
+  Client?: TClient;
 
-    // Template Methods
-    protected abstract ExecuteSelect<TOutput>(command: Input): Output<TOutput> | undefined;
-    protected abstract ExecuteScriptedCommand<TOutput>(command: Input): Output<TOutput> | undefined;
-    protected abstract ExecuteAdd(command: Input): Output<boolean> | undefined;
-    public abstract GetConnectionState(): EnumConnectionState;
-    public abstract Connect(): boolean;
-    public abstract Disconnect(): boolean;
+  // Template Methods
+  protected abstract ExecuteSelect<TOutput>(
+    command: Input
+  ): Output<TOutput> | undefined;
+  protected abstract ExecuteScriptedCommand<TOutput>(
+    command: Input
+  ): Output<TOutput> | undefined;
+  protected abstract ExecuteAdd(command: Input): Output<boolean> | undefined;
+  public abstract GetConnectionState(): EnumConnectionState;
+  public abstract Connect(): boolean;
+  public abstract Disconnect(): boolean;
 
-    // Interface 'IDataProvider' implementation
-    constructor(_configFile: string, private _cliente: new () => TClient | undefined) {
-        this.ConnectionSettings = JSON.parse(_configFile);
-        this.Client = new this._cliente();
+  // Interface 'IDataProvider' implementation
+  constructor(
+    _configFile: string,
+    private _cliente: new () => TClient | undefined
+  ) {
+    this.ConnectionSettings = JSON.parse(_configFile);
+    this.Client = new this._cliente();
+  }
+
+  public Select<TOutput>(command: Input): Output<TOutput> | undefined {
+    if (this.Connect()) {
+      let returnList: Output<TOutput> | undefined;
+      returnList = this.ExecuteSelect(command);
+
+      if (!this.Disconnect()) {
+        throw new Error("ERROR trying to disconnect the data repository");
+      }
+
+      return returnList;
     }
 
-    public Select<TOutput>(command: Input): Output<TOutput> | undefined {
-        if (this.Connect()) {
-            let returnList: Output<TOutput> | undefined;
-            returnList = this.ExecuteSelect(command);
+    return;
+  }
 
-            if (!this.Disconnect()) {
-                throw new Error("ERROR trying to disconnect the data repository");
-            }
+  public Add(command: Input): Output<boolean> | undefined {
+    if (this.Connect()) {
+      let returnObj: Output<boolean> | undefined;
+      returnObj = this.ExecuteAdd(command);
 
-            return returnList;
-        }
+      if (!this.Disconnect()) {
+        throw new Error("ERROR trying to disconnect the data repository");
+      }
 
-        return;
+      return returnObj;
+    } else {
+      return;
     }
+  }
 
-    public Add(command: Input): Output<boolean> | undefined {
-        if (this.Connect()) {
-            let returnObj: Output<boolean> | undefined;
-            returnObj = this.ExecuteAdd(command);
+  public CustomFunctionCommand<TOutput>(
+    _inputFunction: () => Output<TOutput> | undefined
+  ): Output<TOutput> | undefined {
+    if (this.Connect()) {
+      let output: Output<TOutput> | undefined;
+      output = _inputFunction();
 
-            if (!this.Disconnect()) {
-                throw new Error("ERROR trying to disconnect the data repository");
-            }
+      if (!this.Disconnect()) {
+        throw new Error("ERROR trying to disconnect the data repository");
+      }
 
-            return returnObj;
-        } else {
-            return;
-        }
+      return output;
+    } else {
+      return;
     }
+  }
 
-    public CustomFunctionCommand<TOutput>(_inputFunction: () => Output<TOutput> | undefined): Output<TOutput> | undefined {
-        if (this.Connect()) {
-            let output: Output<TOutput> | undefined;
-            output = _inputFunction();
+  public CustomScriptedCommand<TOutput>(
+    command: Input
+  ): Output<TOutput> | undefined {
+    if (this.Connect()) {
+      let output: Output<TOutput> | undefined;
+      output = this.CustomScriptedCommand(command);
 
-            if (!this.Disconnect()) {
-                throw new Error("ERROR trying to disconnect the data repository");
-            }
+      if (!this.Disconnect()) {
+        throw new Error("ERROR trying to disconnect the data repository");
+      }
 
-            return output;
-        } else {
-            return;
-        }
+      return output;
+    } else {
+      return;
     }
-
-    public CustomScriptedCommand<TOutput>(command: Input): Output<TOutput> | undefined {
-        if (this.Connect()) {
-            let output: Output<TOutput> | undefined;
-            output = this.CustomScriptedCommand(command);
-
-            if (!this.Disconnect()) {
-                throw new Error("ERROR trying to disconnect the data repository");
-            }
-
-            return output;
-        } else {
-            return;
-        }
-    }
+  }
 }
