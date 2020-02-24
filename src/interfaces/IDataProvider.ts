@@ -6,7 +6,7 @@ export interface IDataProvider {
   // Methods
   Select<TOutput>(command: Input): Output<TOutput> | undefined;
   Add(command: Input): Output<boolean> | undefined;
-  CustomCommand<TOutput>(command: Input): Output<TOutput> | undefined;
+  CustomScriptedCommand<TOutput>(command: Input): Output<TOutput> | undefined;
   Connect(): boolean;
   Disconnect(): boolean;
   GetConnectionState(): EnumConnectionState;
