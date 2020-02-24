@@ -14,8 +14,8 @@ export abstract class DataProvider implements IDataProvider {
   public abstract Disconnect(): boolean;
 
   // Interface 'IDataProvider' implementation
-  constructor(_configFile: JSON) {
-    this.ConnectionSettings = _configFile;
+  constructor(_configFile: string) {
+    this.ConnectionSettings = JSON.parse(_configFile);
   }
 
   public Read(customCommand: ICustomCommand): [] {
