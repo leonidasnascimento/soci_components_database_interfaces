@@ -7,8 +7,8 @@ export interface IDataProvider {
   Select<TOutput>(command: Input): Output<TOutput> | undefined;
   Add(command: Input): Output<boolean> | undefined;
   CustomScriptedCommand<TOutput>(command: Input): Output<TOutput> | undefined;
-  CustomFunctionCommand<TDataRepo, TOutput>(
-    _inputFunction: (dataRepoClient?: TDataRepo) => Output<TOutput> | undefined
+  CustomFunctionCommand<TOutput>(
+    _inputFunction: (dataRepoClient?: any) => Output<TOutput> | undefined
   ): Output<TOutput> | undefined;
   Connect(): boolean;
   Disconnect(): boolean;
