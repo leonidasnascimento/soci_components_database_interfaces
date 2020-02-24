@@ -7,8 +7,8 @@ export abstract class DataProvider implements IDataProvider {
   ConnectionSettings: JSON;
 
   // Template Methods
-  public abstract ExecuteRead(customCommand: ICustomCommand): [];
-  public abstract ExecuteCommand(customCommand: ICustomCommand): boolean;
+  protected abstract ExecuteRead(customCommand: ICustomCommand): [];
+  protected abstract ExecuteCommand(customCommand: ICustomCommand): boolean;
   public abstract GetConnectionState(): EnumConnectionState;
   public abstract Connect(): boolean;
   public abstract Disconnect(): boolean;
