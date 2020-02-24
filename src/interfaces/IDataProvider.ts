@@ -1,11 +1,14 @@
-import  { IConnectionSettings } from  "./IConnectionSettings";
 import { ICustomCommand } from "./ICustomCommand";
+import { EnumConnectionState } from "../enum/EnumConnectionState"
 
 export interface IDataProvider {
     // Properties
-    ConnectionSettings: IConnectionSettings;
+    ConnectionSettings: JSON;
 
     // Methods
     Read(customCommand: ICustomCommand): [];
-    ExecuteCommand(customCommand: ICustomCommand): boolean;
+    Command(customCommand: ICustomCommand): boolean;
+    Connect(): boolean;
+    Disconnect(): boolean;
+    GetConnectionState(): EnumConnectionState;
 }
