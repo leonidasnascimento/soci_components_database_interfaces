@@ -1,5 +1,5 @@
 export interface ICustomCommand {
-    Query: string;
-    ObjectKey: object;
-    RepositoryName: string;
+  Query: string;
+  ObjectKey: object;
+  RepositoryName: string;
 }

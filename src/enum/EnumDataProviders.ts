@@ -1,9 +1,9 @@
 export enum EnumDataProviders {
-    MSSQL = 0,
-    MySQL,
-    Oracle,
-    MongoDB,
-    Cassandra,
-    Firebase,
-    Redis
+  MSSQL = 0,
+  MySQL,
+  Oracle,
+  MongoDB,
+  Cassandra,
+  Firebase,
+  Redis
 }
